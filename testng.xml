@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Samle TestNG Test Suite">
+  <test name="Acegrades LoginTest">
+    <classes>
+      <class name="com.colanInfotech.TextNGBasics.Sample_TestNGTest"/>
+      <class name="com.colanInfotech.TextNGBasics.TestNG_Assertions"/>
+      <class name="com.colanInfotech.TextNGBasics.TestNG_DependsOnMethod"/>
+      <class name="com.colanInfotech.TextNGBasics.TestNG_ExceptionTimedOut"/>
+      <class name="com.colanInfotech.TextNGBasics.TestNG_Groups"/>
+      <class name="com.colanInfotech.TextNGBasics.TestNG_InvocationCount"/>
+      <class name="com.colanInfotech.TextNGBasics.TestNG_Priorities"/>  
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Samle TestNG Test Suite -->

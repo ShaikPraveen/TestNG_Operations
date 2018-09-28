@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Samle TestNG Test Suite]">
+  <test name="Acegrades LoginTest(failed)">
+    <classes>
+      <class name="com.colanInfotech.TextNGBasics.Sample_TestNGTest">
+        <methods>
+          <include name="teardown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.colanInfotech.TextNGBasics.Sample_TestNGTest -->
+      <class name="com.colanInfotech.TextNGBasics.TestNG_Assertions">
+        <methods>
+          <include name="teardown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.colanInfotech.TextNGBasics.TestNG_Assertions -->
+      <class name="com.colanInfotech.TextNGBasics.TestNG_DependsOnMethod">
+        <methods>
+          <include name="launchAp"/>
+          <include name="closeApp"/>
+          <include name="homepageTest"/>
+          <include name="loginTest"/>
+        </methods>
+      </class> <!-- com.colanInfotech.TextNGBasics.TestNG_DependsOnMethod -->
+    </classes>
+  </test> <!-- Acegrades LoginTest(failed) -->
+</suite> <!-- Failed suite [Samle TestNG Test Suite] -->

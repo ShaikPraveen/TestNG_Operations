@@ -1,0 +1,507 @@
+  TestNG:-
+   -------
+         -> Testng is a Testing Framework for design the Test cases.
+         -> Testng provided different annotations 
+         -> @BeforeSuite, @BeforeClass, @BeforeMethod, @BeforeTest  -> These all are Pre-conditions
+         -> @Test Method -> This is Test method
+         -> @AfterSuite, @AfterClass, @AfterTest, @AfterMethod     -> These are Post-conditions
+         -> and also Testng provided @Dataprovider -> For excuting multiple test cases
+         -> For executing Testng scripts we dont use Main Method
+         -> We mainly using <== @BeforeMethod and @Test and @AfterMethod ==> For excuting the scripts
+   
+   Benefits:-
+   ----------
+
+        -> Very good HTML Reports
+        -> Different annotations
+        -> Priority/dependencies
+        -> grouping
+        -> @dataprovider
+
+
+  How to count Number fo Test cases in class using TestNg?
+
+ 
+
+   The Following script explains number of annoations and how it will excute
+
+   Example:--
+
+         package com.testng.operations;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Testng_Annotations 
+{
+	
+			 @BeforeSuite //1
+			 public void test1() 
+			 {
+				 System.out.println("Before Suite Method ->This Test1 Method");
+			 }
+			 
+			 @BeforeTest//2
+			 public void test2() 
+			 {
+				 System.out.println("Before Test Method ->This Test2 Method");
+			 } 
+			 
+			 @BeforeClass//3
+			 public void test3() 
+			 {
+				 System.out.println("Before Class Method ->This Test3 Method");
+			 }
+			 
+			 @BeforeMethod//4
+			 public void test4() 
+			 {
+				 System.out.println("Before  Method ->This Test4 Method");
+			 }
+			 
+			
+			 
+			 @Test
+			 public void goofleTest()
+			 {
+				 System.out.println("Google Test Success");
+			 }
+			 
+			 @Test
+			 public void linkTest()
+			 {
+				 System.out.println("Google link is there");
+			 }
+			 
+			 @Test
+			 public void loginTest()
+			 {
+				 System.out.println("Login Success");
+			 }
+			 
+			 @AfterMethod//5
+			 public void test5() 
+			 {
+				 System.out.println("After  Method ->This Test5 Method");
+			 }
+			 @AfterClass//6
+			 public void test6() 
+			 {
+				 System.out.println("After Class Method ->This Test6 Method");
+			 }
+			 @AfterTest//7
+			 public void test7() 
+			 {
+				 System.out.println("After Test Method ->This Test7 Method");
+			 }
+		
+			 
+			 @AfterSuite
+			 public void test8() 
+			 {
+				 System.out.println("After Suite Method ->This Test1");
+			 }
+			 
+			 
+	/*
+	 *  BeforeMethod
+	 *  Test
+	 *  After Method
+	 *  
+	 *  BeforeMethod
+	 *  Test
+	 *  After Method
+	 *   
+	 *  BeforeMethod
+	 *  Test
+	 *  After Method
+	 * */		 
+}
+
+--------------
+
+     The following script explain how to set Priority on Test cases and how to set Groups in Test cases
+
+      Example:-  
+
+         package com.testng.operations;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class Acegrades_Test
+{
+	   WebDriver driver;
+	  
+	   @BeforeMethod
+	   public void setup()
+	   {
+		   
+		 System.setProperty("webdriver.chrome.driver", "E:\\Automation\\Q_Edge\\Launching_Browsers\\Launching_Browsers_Latest\\chromedriver.exe");
+		 driver=new ChromeDriver();
+		 driver.manage().window().maximize();
+		 driver.manage().deleteAllCookies();
+		 
+		 driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+		 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		 driver.get("https://dev.internal.acegrades.com");
+	   }
+	   
+	   @Test(priority=1,groups="Title")
+	   public void launchAppTest()
+	   {
+		  String title= driver.getTitle();
+		  System.out.println("PageTitle is "+title);
+		  
+		  Assert.assertEquals(title, "ACEGRADES", "Title Not Match");
+	   }
+	
+	   @Test(priority=2,groups="Link Text")
+	   public void cliklinkTest()
+	   {
+		   driver.findElement(By.linkText("LOG IN")).click();
+		   Assert.assertEquals(driver.getCurrentUrl(),"https://dev.internal.acegrades.com/login.html", "Not Match");
+	   }
+	   
+	   @Test(priority=3,groups="Login")
+	   public void loginTest()
+	   {
+		   driver.findElement(By.linkText("LOG IN")).click();
+		   driver.findElement(By.id("email")).sendKeys("ace.ifs@acegrades.com");
+		   driver.findElement(By.id("password")).sendKeys("123456");
+		   driver.findElement(By.id("loginId")).click();
+		   boolean b=  driver.findElement(By.linkText("CLASSES")).isDisplayed();
+		   
+		   Assert.assertTrue(b,"Not Preset");
+	   }
+	   
+	   
+	   @Test(priority=4,groups="Create Assignment")
+	   public void createassignmentTest()
+	   {
+		   driver.findElement(By.linkText("LOG IN")).click();
+		   driver.findElement(By.id("email")).sendKeys("ace.ifs@acegrades.com");
+		   driver.findElement(By.id("password")).sendKeys("123456");
+		   driver.findElement(By.id("loginId")).click();
+		   driver.findElement(By.id("cratenew_id")).click();
+		   boolean b= driver.findElement(By.linkText("BACK TO DASHBOARD")).isDisplayed();
+		   
+		   Assert.assertTrue(b, "Link is not Present");  
+	   } 
+	   
+	   @Test(priority=5,groups="Login")
+	   public void logoutApp() throws InterruptedException
+	   {
+		   driver.findElement(By.linkText("LOG IN")).click();
+		   driver.findElement(By.id("email")).sendKeys("ace.ifs@acegrades.com");
+		   driver.findElement(By.id("password")).sendKeys("123456");
+		   driver.findElement(By.id("loginId")).click();
+		   
+		   Thread.sleep(3000);
+		   driver.findElement(By.id("cratenew_id")).click();
+		   
+		  boolean b= driver.findElement(By.xpath("//span[@class='txt ng-binding']")).isDisplayed();	   
+		  Assert.assertTrue(b,"Logo Not Displayed"); 
+	   }
+	
+	   @AfterMethod
+	   public void teardown()
+	   {
+		   driver.quit();
+	   }
+}
+
+
+----------------
+
+   What is dependesOnMethod():-
+  ===========================
+
+
+          Actually this method dependens on another method.
+
+           For example login button is not working , we can not able to see home page.
+           Here Homepage depends on Login Page. Without login works we can not do anything
+
+        
+               
+         Ex:- public void loginTest()
+              {
+              }
+
+              @Test(dependesOnMethods="loginTest")
+              public void loginTest()
+              {
+
+              }
+
+       Example:-- 
+
+        package com.testng.operations;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class DependsOnMethods_Annotation 
+{
+	 WebDriver driver;
+	
+	 @BeforeMethod
+	   public void setup()
+	   {
+		   
+		 System.setProperty("webdriver.chrome.driver", "E:\\Automation\\Q_Edge\\Launching_Browsers\\Launching_Browsers_Latest\\chromedriver.exe");
+		 driver=new ChromeDriver();
+		 driver.manage().window().maximize();
+		 driver.manage().deleteAllCookies();
+		 
+		 driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+		 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		 driver.get("https://dev.internal.acegrades.com");
+	   }
+	 
+	 
+	 @Test()
+	   public void loginTest()
+	   {
+		   driver.findElement(By.linkText("LOG IN")).click();
+		   driver.findElement(By.id("email")).sendKeys("ace.ifs@acegrades.com");
+		   driver.findElement(By.id("password")).sendKeys("123456");
+		   driver.findElement(By.id("loginId123456")).click();
+		  
+		}
+	 
+	   @Test(dependsOnMethods="loginTest")
+	   public void  homepageTest()
+	   {
+		   driver.findElement(By.linkText("LOG IN")).click();
+		   driver.findElement(By.id("email")).sendKeys("ace.ifs@acegrades.com");
+		   driver.findElement(By.id("password")).sendKeys("123456");
+		   driver.findElement(By.id("loginId")).click();
+	   }
+	 
+	 
+	   @AfterMethod
+	   public void teardown()
+	   {
+		   driver.quit();
+	   }
+	   
+	  //Here the Final result is Failed. Why because the homepageTest() method totally depends on LoginTest() Method
+	  //But loginTest() failed and homepageTest() method will skip
+	   
+}
+
+
+   Example 2:-
+
+        package com.testng.operations;
+
+import org.testng.annotations.Test;
+
+public class Dependsonmethod_Example 
+{
+	
+	@Test
+	public void loginTest()
+	{
+		System.out.println("Login Test Passs");
+		int i=2/0;
+	}
+	
+	@Test(dependsOnMethods="loginTest")
+    public void homepageTest()
+    {
+		System.out.println("Home page is Open");
+    	
+    }
+	
+	@Test(dependsOnMethods="loginTest")
+	public void clicklinkTest()
+	{
+		System.out.println("Link Clickabe");
+	}
+	
+	@Test(dependsOnMethods="loginTest")
+	public void createStuident()
+	{
+		System.out.println("Link Clickabe");
+	}
+}
+
+-------------             
+          
+            What is invocationCount() Method:-
+          
+                           I want execute same test case with multiple times then we use invocationCount().Generally we dont use this invocation() method, you want to                             dump the data into your system that cases we use this method.
+ 
+                   Example:-
+
+                             @Test(invocationCount=10)
+                             public void sum()
+                             {
+                             }
+    
+       Example 2:--
+
+                 package com.testng.operations;
+
+               import org.testng.annotations.Test;
+
+               public class InvocationCount 
+               {
+	
+	@Test(invocationCount=5)
+	public void add()
+	{
+		int a=10;
+		int b=20;
+		int c=a+b;
+		
+		System.out.println("The sum of two numbers are "+ c);
+}
+}
+-------------------
+
+               What is ExceptionTimeOut() Method:-
+
+       Example:- 
+
+ package com.testng.operations;
+
+import org.testng.annotations.Test;
+
+public class ExceptionTimeOut
+{
+	
+	/*@Test(invocationTimeOut=2,expectedExceptions=NumberFormatException.class)
+	public void infiniteloopTest()
+	{
+		
+		int i=1;
+		while(i==1)
+		{
+			System.out.println(i);
+		}
+	}*/
+	
+	
+	@Test(expectedExceptions=NumberFormatException.class)
+	public void test1()
+	{
+		String a="110A";
+		Integer.parseInt(a);
+	}
+
+}
+
+------------
+
+            How to Pass Parameters in Testng.xml file 
+
+                         In testng.xml file we maintain environment variables and test data
+
+      Example:-
+
+     package com.testng.parameters;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+public class Testng_Paremeters
+{
+	WebDriver driver;
+	
+	@Test
+	@Parameters({"browser","url","email","password"})
+	public void acelogin(String browser, String url, String email, String password)
+	{
+		if (browser.equals("chrome"))
+		{
+		 System.setProperty("webdriver.chrome.driver", "E:\\Automation\\Q_Edge\\Launching_Browsers\\Launching_Browsers_Latest\\chromedriver.exe");
+		 driver=new ChromeDriver();
+		 driver.manage().window().maximize();
+		 driver.manage().deleteAllCookies();
+		 
+		 driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+		 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		 
+		}else if(browser.equals("firefox"))
+		{
+		 System.setProperty("webdriver.gecko.driver", "E:\\Automation\\Q_Edge\\Launching_Browsers\\Launching_Browsers_Latest\\geckodriver.exe");
+		 driver=new FirefoxDriver();
+		 driver.manage().window().maximize();
+		
+		}
+		
+		   driver.get(url);
+		   driver.findElement(By.linkText("LOG IN")).click();
+		   driver.findElement(By.id("email")).clear();;
+		   driver.findElement(By.id("email")).sendKeys(email);;
+		   driver.findElement(By.id("password")).sendKeys(password);
+		   driver.findElement(By.id("loginId")).click();	
+		   driver.close();
+	}
+	
+	 
+}
+
+
+  testng.xml file 
+
+  
+ <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TESTNG TEST SUITE">
+
+  <test  name="TESTNG PARAMETERS TEST">
+      <parameter name="env" value="QA"/>
+      <parameter name="browser" value="chrome"/>
+      <parameter name="url"   value="https://dev.internal.acegrades.com"/>
+      <parameter name="email" value="ace.ifs@acegrades.com"/>
+      <parameter name="password" value="123456"/>  
+      
+   
+    <classes>
+      <class name="com.testng.parameters.Testng_Paremeters"/>
+      </classes>
+      
+  </test> <!-- Default test -->
+</suite> <!-- Default suite -->
+
+
+
+
+TestNG Assertons:-
+------------------
+
+     1. AssertTrue Means :- We are expecting True, but we are getting False it will be Failed
+
+
