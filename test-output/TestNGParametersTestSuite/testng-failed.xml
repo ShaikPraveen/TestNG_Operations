@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [TestNGParametersTestSuite]">
+  <parameter name="password" value="123456"/>
+  <parameter name="browser" value="chrome"/>
+  <parameter name="env" value="QA"/>
+  <parameter name="url" value="https://acegrades.com/"/>
+  <parameter name="email" value="sample.teacher@gmail.com"/>
+  <test name="TestNG Parameters Test(failed)">
+    <parameter name="password" value="123456"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="QA"/>
+    <parameter name="url" value="https://acegrades.com/"/>
+    <parameter name="email" value="sample.teacher@gmail.com"/>
+    <classes>
+      <class name="com.colanInfotech.TextNGBasics.TestNG_Parameters">
+        <methods>
+          <include name="aceloginTest" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- com.colanInfotech.TextNGBasics.TestNG_Parameters -->
+    </classes>
+  </test> <!-- TestNG Parameters Test(failed) -->
+</suite> <!-- Failed suite [TestNGParametersTestSuite] -->

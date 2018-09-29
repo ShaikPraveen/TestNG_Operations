@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestNGParametersTestSuite">
+  <test name="TestNG Parameters Test">
+  <parameter name="env" value="QA"></parameter>
+  <parameter name="browser" value="chrome"></parameter>
+  <parameter name="url" value="https://acegrades.com/"></parameter>
+  <parameter name="email" value="sample.teacher@gmail.com"></parameter>
+  <parameter name="password" value="123456"></parameter>
+  
+    <classes>
+      <class name="com.colanInfotech.TextNGBasics.TestNG_Parameters"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- TestNGParametersTestSuite -->

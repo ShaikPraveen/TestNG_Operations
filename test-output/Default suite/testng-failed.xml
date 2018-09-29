@@ -3,14 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.colanInfotech.TextNGBasics.TestNG_Assertions">
+      <class name="com.testng.parameters.ParameterTest">
         <methods>
-          <include name="verifyAceTitleTest"/>
-          <include name="teardown"/>
-          <include name="setup"/>
-          <include name="logoTest"/>
+          <include name="freeCRMLoginTest"/>
         </methods>
-      </class> <!-- com.colanInfotech.TextNGBasics.TestNG_Assertions -->
+      </class> <!-- com.testng.parameters.ParameterTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
